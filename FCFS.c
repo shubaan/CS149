@@ -13,12 +13,11 @@ void FirstCome(struct process* plist, float* runtime){
 			*runtime = (*runtime * -1) + (float) MAX_QUANTA;
 			break;
 		} 
-		else if(counter > NUM_PROCESS){
+		else if(counter >= NUM_PROCESS){
 		*runtime = (float) MAX_QUANTA - *runtime;
 			break;
 		}
-		printf("%f\n", *runtime);
-		
+				
 		*runtime = *runtime - plist[counter].service_time;
 		counter++;
 	}
