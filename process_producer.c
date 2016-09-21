@@ -2,10 +2,6 @@
 #include <stdlib.h>
 #include "process_producer.h"
 
-#define TRUE 1
-#define FALSE 0
-#define NUM_PROCESS 5 // USED TO DETERMINE NUMBER OF PROCESSES WANTED
-
 void PrintProcessList(struct process process_list[]){
 	
 	// Print Processes for testing
@@ -22,7 +18,7 @@ void CreateProcesses(struct process** process_list){
 	*process_list = calloc(NUM_PROCESS, sizeof(struct process));
 	 //generate proesses
 	for(int x = 0; x < NUM_PROCESS; x++){
-		arrival_time = rand() % 100;
+		arrival_time = rand() % MAX_QUANTA;
 		service_time = rand() % 99;
 		priority = rand() % 5;
 		if( service_time == 0 ) service_time += 1;
