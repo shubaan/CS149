@@ -1,6 +1,6 @@
-#ifndef PROCESS_PRODUCER
-#define PROCESS_PRODUCER
+#ifndef FCFS
+#define FCFS
 
-void FCFS(struct process* plist, float* runtime);
+void FirstCome(struct process* plist, float* runtime);
 
 #endif

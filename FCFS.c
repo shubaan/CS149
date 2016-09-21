@@ -1,12 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "process_producer.h"
-#include "FCFS.h"
 
 #define TRUE 1
 #define FALSE 0
 
-void FCFS(struct process* plist, float* runtime){
+void FirstCome(struct process* plist, float* runtime){
 	*runtime = (float) MAX_QUANTA;
 	int counter = 0;
 	while(TRUE){
@@ -18,7 +17,7 @@ void FCFS(struct process* plist, float* runtime){
 		*runtime = (float) MAX_QUANTA - *runtime;
 			break;
 		}
-		//printf("%f\n", *runtime);
+		printf("%f\n", *runtime);
 		
 		*runtime = *runtime - plist[counter].service_time;
 		counter++;
