@@ -1,6 +1,6 @@
 #ifndef PROCESS_PRODUCER
 #define PROCESS_PRODUCER
 
-float FCFS(struct process* plist);
+void FCFS(struct process* plist, float* runtime);
 
 #endif
