@@ -11,6 +11,6 @@ int main(){
 	CreateProcesses(&list);
 	PrintProcessList(list);
 	
-	runtime = FCFS(list);
-	printf("First Come First Server: %.2f\n", runtime);
+	FCFS(list, &runtime);
+	printf("|%-22s|Quanta Used\n|%-.25s|  %.2f\n", "Algorithm", "First Come First Serve", runtime);
 }
