@@ -6,16 +6,7 @@
 #define FALSE 0
 #define NUM_PROCESS 5 // USED TO DETERMINE NUMBER OF PROCESSES WANTED
 
-int main(){
-	int seed = time(NULL);
-	srand(seed);
-	struct process* process_list;
-	CreateProcesses(&process_list);
-	ProcessPrintList(process_list);
-	return 0;
-}
-
-void ProcessPrintList(struct process process_list[]){
+void PrintProcessList(struct process process_list[]){
 	
 	// Print Processes for testing
 	for(int x = 0; x < NUM_PROCESS; x++){
