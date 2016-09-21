@@ -17,6 +17,6 @@ int main(){
 	FirstCome(list, &runtime);
 	printf("|%-22s|Quanta Used\n|%-.25s|  %.2f\n", "Algorithm", "First Come First Serve", runtime);
 
-	//RoundRobin(list, &runtime);
-	//printf("|%-.25s|  %.2f\n", "Red Robin", runtime);
+	RoundRobin(list, &runtime);
+	printf("|%-22s|  %.2f\n", "Red Robin", runtime);
 }
