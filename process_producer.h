@@ -3,7 +3,7 @@
 
 struct process{
 	int arrival_time;
-	int service_time;
+	float service_time;
 	int priority;
 	char name;
 };
