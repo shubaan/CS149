@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "process_producer.h"
 #include "FCFS.h"
+#include "RR.h"
+#include "process_producer.h"
+
+//TODO: CONGREGATE DEFINE DEFINTIONS IN OWN HEADERFILE
 
 int main(){
 	int seed = time(NULL);
@@ -11,6 +14,9 @@ int main(){
 	CreateProcesses(&list);
 	PrintProcessList(list);
 	
-	FCFS(list, &runtime);
+	FirstCome(list, &runtime);
 	printf("|%-22s|Quanta Used\n|%-.25s|  %.2f\n", "Algorithm", "First Come First Serve", runtime);
+
+	//RoundRobin(list, &runtime);
+	//printf("|%-.25s|  %.2f\n", "Red Robin", runtime);
 }
