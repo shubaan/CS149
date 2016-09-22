@@ -7,7 +7,7 @@
 
 void FirstCome(struct process* plist, float* runtime){
 	*runtime = (float) MAX_QUANTA;
-	int counter = 0;w
+	int counter = 0;
 	while(TRUE){
 		if(*runtime <= 0){
 			*runtime = (*runtime * -1) + (float) MAX_QUANTA; // if the current process goes beyond the maximum time, it is added. for example if process 1 takes 7 seconds and the processes
