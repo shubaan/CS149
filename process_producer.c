@@ -3,8 +3,6 @@
 #include "process_producer.h"
 
 void PrintProcessList(struct process process_list[]){
-	
-	// Print Processes for testing
 	for(int x = 0; x < NUM_PROCESS; x++){
 		printf("%c: Service Time: %.1f Priority: %d Arrival Time: %d\n", process_list[x].name, process_list[x].service_time, process_list[x].priority, process_list[x].arrival_time);
 	}
