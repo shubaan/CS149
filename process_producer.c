@@ -17,7 +17,7 @@ void CreateProcesses(struct process** process_list){
 	 //generate proesses
 	for(int x = 0; x < NUM_PROCESS; x++){
 		arrival_time = rand() % MAX_QUANTA;
-		service_time = rand() % 99;
+		service_time = rand() % (MAX_QUANTA - 1);
 		priority = rand() % 5;
 		if( service_time == 0 ) service_time += 1;
 		service_time = service_time / 10.0;
