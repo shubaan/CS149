@@ -10,9 +10,9 @@ void PrintProcessList(struct process process_list[]){
 
 void CreateProcesses(struct process** process_list){
 	char alphabet[26] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	int arrival_time;
-	float service_time;
-	int priority;
+	int arrival_time; // [0 - 99]
+	float service_time; // [0.1 - 10]
+	int priority; // [1 - 4]
 	*process_list = calloc(NUM_PROCESS, sizeof(struct process));
 	 //generate proesses
 	for(int x = 0; x < NUM_PROCESS; x++){
@@ -28,6 +28,21 @@ void CreateProcesses(struct process** process_list){
 		(*process_list)[x].priority = priority;
 		(*process_list)[x].name = alphabet[x];
 	}
-
 }
 
+void SortProcesses(struct process** process_list) {
+	int temp;
+
+	for (int x = 0; x < NUM_PROCESS; x++) {
+		for (int y = x + 1; y < NUM_PROCESS; y++) {
+
+			if ((*process_list)[y].arrival_time < (*process_list)[x].arrival_time) {
+				temp = (*process_list)[x].arrival_time;
+				(*process_list)[x].arrival_time = (*process_list)[y].arrival_time;
+				(*process_list)[y].arrival_time = temp;
+			}
+
+		}
+	}
+
+}
