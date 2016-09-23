@@ -3,7 +3,7 @@
 #include "FCFS.h"
 #include "RR.h"
 #include "process_producer.h"
-
+#include "Sorter.h"
 //TODO: CONGREGATE DEFINE DEFINTIONS IN OWN HEADERFILE
 
 int main(){
@@ -14,9 +14,12 @@ int main(){
 	CreateProcesses(&list);
 	PrintProcessList(list);
 	
-	FirstCome(list, &runtime);
-	printf("|%-22s|Quanta Used\n|%-.25s|  %.2f\n", "Algorithm", "First Come First Serve", runtime);
+	SortBy(&list, 0);
+	printf("\n\n--------------------------------------------------\n\n");
+	PrintProcessList(list);
+	//FirstCome(list, &runtime);
+	//printf("|%-22s|Quanta Used\n|%-.25s|  %.2f\n", "Algorithm", "First Come First Serve", runtime);
 
-	RoundRobin(list, &runtime);
-	printf("|%-22s|  %.2f\n", "Red Robin", runtime);
+	//RoundRobin(list, &runtime);
+	//printf("|%-22s|  %.2f\n", "Red Robin", runtime);
 }

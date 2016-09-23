@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "process_producer.h"
+#include "Sorter.h"
 
 void PrintProcessList(struct process process_list[]){
 	for(int x = 0; x < NUM_PROCESS; x++){
