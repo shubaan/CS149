@@ -14,10 +14,17 @@ int main(){
 	CreateProcesses(&list);
 	SortProcesses(&list);
 	PrintProcessList(list);
-	
 
+	printProcessTracker();
+	printFCFSOrder(list, NUM_PROCESS);
+	//SortBy(&list, 0);
+	//PrintProcessList(list);
 }
 
+/*
+* Blueprint to track where each process is during the 100 quatum time frame
+* Can tell some processes don't start at arrival time because another process is still running
+*/
 void printProcessTracker() {
 	for (int i = 0; i < 100; i++) {
 		printf("%d ", i);
@@ -25,11 +32,14 @@ void printProcessTracker() {
 	printf("\n");
 }
 
+
 void printFCFSOrder(struct process plist[], int size) {
 	char *charArray = getFCFSOrder(plist, size);
 
+	// Adjust to add extra spaces to match printProcessTracker();
+	// Char array doesn't have extra spaces to accommodate the difference
 	for (int i = 0; i < 100; i++) {
-		if (charArray[i] == ' ' && i < 10) { // matching
+		if (charArray[i] == ' ' && i < 10) { 
 			printf("  ");
 		} else if (charArray[i] == ' ' && i >= 10) {
 			printf("   ");
