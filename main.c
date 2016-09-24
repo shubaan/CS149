@@ -6,6 +6,9 @@
 #include "Sorter.h"
 //TODO: CONGREGATE DEFINE DEFINTIONS IN OWN HEADERFILE
 
+void printProcessTracker();
+void printFCFSOrder(struct process plist[], int size);
+
 int main(){
 	int seed = time(NULL);
 	float runtime;
