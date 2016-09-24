@@ -22,6 +22,7 @@ int main(){
 	printFCFSOrder(list, NUM_PROCESS);
 	//SortBy(&list, 0);
 	//PrintProcessList(list);
+	return 1;
 }
 
 /*
