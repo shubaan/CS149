@@ -25,9 +25,9 @@ void FirstCome(struct process* plist, float* runtime){
 	return;
 }
 
-char *getFCFSOrder(struct process plist[], int size) {
+char* getFCFSOrder(struct process* plist, int size) {
 
-	char *arrayFCFSOrder = (char *) malloc(sizeof(char) * 100);
+	char *arrayFCFSOrder = malloc(sizeof(char) * 100);
 
 	int quanta = 0;
 	for (int i = 0; i < size; i++) {
