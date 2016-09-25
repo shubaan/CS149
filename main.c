@@ -9,7 +9,6 @@
 
 void printProcessTracker();
 void printFCFSOrder(struct process** plist, int* size);
-void printFCFSOrder(struct process plist[], int size);
 
 int main(){
 	int seed = time(NULL);
