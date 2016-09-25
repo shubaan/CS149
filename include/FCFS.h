@@ -9,4 +9,5 @@ void FirstCome(struct process* plist, float* runtime);
 char* getFCFSOrder(struct process** plist, int *size);
 
 
+char* getFCFSOrder(struct process* plist, int size);
 #endif
