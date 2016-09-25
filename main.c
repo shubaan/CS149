@@ -8,11 +8,7 @@
 //TODO: CONGREGATE DEFINE DEFINTIONS IN OWN HEADERFILE
 
 void printProcessTracker();
-<<<<<<< HEAD
 void printFCFSOrder(struct process** plist, int* size);
-=======
-void printFCFSOrder(struct process plist[], int size);
->>>>>>> 918c0438f95cbe94b243813a41840e982fc7af09
 
 int main(){
 	int seed = time(NULL);
@@ -22,10 +18,9 @@ int main(){
 	CreateProcesses(&list);
 	SortProcesses(&list);
 	PrintProcessList(list);
-	int numberOfCompletedProcess = 0;
 
 	printProcessTracker();
-	printFCFSOrder(list, numberOfCompletedProcess);
+	printFCFSOrder(list, NUM_PROCESS);
 
 	//SortBy(&list, 0);
 	//PrintProcessList(list);
