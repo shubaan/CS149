@@ -32,6 +32,8 @@ void CreateProcesses(struct process** process_list){
 	}
 }
 
+/*
+Deprecated, use SortBy in Sorter.h instead
 void SortProcesses(struct process** process_list) {
 	int temp;
 
@@ -48,3 +50,4 @@ void SortProcesses(struct process** process_list) {
 	}
 
 }
+*/

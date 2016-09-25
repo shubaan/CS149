@@ -10,9 +10,12 @@ void SortBy(struct process** plist, int num){
 	int pivot_location = NUM_PROCESS - 1;
 	int head = 0;
 	int inc_dec = 1;
-	float compare_num = (*plist)[pivot_location].service_time;
+	float compare_num;
 
-	while(TRUE){
+	//Sort by Service Time
+	if(num == 1){
+		compare_num = (*plist)[pivot_location].service_time;
+		while(TRUE){
 		if((*plist)[head].service_time > compare_num && head < pivot_location){
 			swap(&(*plist)[head], &(*plist)[pivot_location], sizeof((*plist)[head]), sizeof((*plist)[pivot_location]));
 			swap(&pivot_location, &head, sizeof(pivot_location), sizeof(head));
@@ -29,13 +32,60 @@ void SortBy(struct process** plist, int num){
 		if(head == pivot_location) break;
 
 	}
-	//PIVOT LOCATION - 1 WHAT IF 0?
-
-	//TEST ORDER
 
 	if(pivot_location > 0) SortByRec(&*plist, num, 0, pivot_location);
 	if(pivot_location < NUM_PROCESS - 1) SortByRec(&*plist, num, pivot_location + 1, NUM_PROCESS - 1);
-	PrintServiceTime(&*plist);
+	
+}
+	else if(num == 2){ //sort by priority
+		compare_num = (*plist)[pivot_location].priority;
+		while(TRUE){
+			if((*plist)[head].priority > compare_num && head < pivot_location){
+				swap(&(*plist)[head], &(*plist)[pivot_location], sizeof((*plist)[head]), sizeof((*plist)[pivot_location]));
+				swap(&pivot_location, &head, sizeof(pivot_location), sizeof(head));
+				inc_dec *= -1;
+				head += inc_dec;
+		}
+			else if((*plist)[head].priority < compare_num && head > pivot_location){
+				swap(&(*plist)[head], &(*plist)[pivot_location], sizeof((*plist)[head]), sizeof((*plist)[pivot_location]));
+				swap(&pivot_location, &head, sizeof(pivot_location), sizeof(head));
+				inc_dec *= -1;
+				head += inc_dec;
+		}
+		else head += inc_dec;
+		if(head == pivot_location) break;
+
+	}
+
+	if(pivot_location > 0) SortByRec(&*plist, num, 0, pivot_location);
+	if(pivot_location < NUM_PROCESS - 1) SortByRec(&*plist, num, pivot_location + 1, NUM_PROCESS - 1);
+	
+	}
+
+	else if(num == 0){
+		compare_num = (*plist)[pivot_location].arrival_time;
+			while(TRUE){
+		if((*plist)[head].arrival_time > compare_num && head < pivot_location){
+			swap(&(*plist)[head], &(*plist)[pivot_location], sizeof((*plist)[head]), sizeof((*plist)[pivot_location]));
+			swap(&pivot_location, &head, sizeof(pivot_location), sizeof(head));
+			inc_dec *= -1;
+			head += inc_dec;
+		}
+		else if((*plist)[head].arrival_time < compare_num && head > pivot_location){
+			swap(&(*plist)[head], &(*plist)[pivot_location], sizeof((*plist)[head]), sizeof((*plist)[pivot_location]));
+			swap(&pivot_location, &head, sizeof(pivot_location), sizeof(head));
+			inc_dec *= -1;
+			head += inc_dec;
+		}
+		else head += inc_dec;
+		if(head == pivot_location) break;
+
+	}
+
+	if(pivot_location > 0) SortByRec(&*plist, num, 0, pivot_location);
+	if(pivot_location < NUM_PROCESS - 1) SortByRec(&*plist, num, pivot_location + 1, NUM_PROCESS - 1);
+	
+	}
 	return;
 }
 
@@ -44,15 +94,39 @@ void SortByRec(struct process** plist, int num, int range_lo, int range_hi){
 	int pivot_location = range_hi;
 	int head = range_lo;
 	int inc_dec = 1;
-	float compare_num = (*plist)[pivot_location].service_time;
+	float compare_num;
+	if(num == 1){
+		compare_num = (*plist)[pivot_location].service_time;
+		while(TRUE){
+			if((*plist)[head].service_time > compare_num && head < pivot_location){
+				swap(&(*plist)[head], &(*plist)[pivot_location], sizeof((*plist)[head]), sizeof((*plist)[pivot_location]));
+				swap(&pivot_location, &head, sizeof(pivot_location), sizeof(head));
+				inc_dec *= -1;
+				head += inc_dec;
+		}
+			else if((*plist)[head].service_time < compare_num && head > pivot_location){
+				swap(&(*plist)[head], &(*plist)[pivot_location], sizeof((*plist)[head]), sizeof((*plist)[pivot_location]));
+				swap(&pivot_location, &head, sizeof(pivot_location), sizeof(head));
+				inc_dec *= -1;
+				head += inc_dec;
+		}
+			else head += inc_dec;
+			if(head == pivot_location) break;
+	}	
+	if(pivot_location > 0) SortByRec(&*plist, num, range_lo, pivot_location - 1);
+	if(pivot_location < NUM_PROCESS - 1) SortByRec(&*plist, num, pivot_location, range_hi);
+}
+
+if(num == 2){
+	compare_num = (*plist)[pivot_location].priority;
 	while(TRUE){
-		if((*plist)[head].service_time > compare_num && head < pivot_location){
+		if((*plist)[head].priority > compare_num && head < pivot_location){
 			swap(&(*plist)[head], &(*plist)[pivot_location], sizeof((*plist)[head]), sizeof((*plist)[pivot_location]));
 			swap(&pivot_location, &head, sizeof(pivot_location), sizeof(head));
 			inc_dec *= -1;
 			head += inc_dec;
 		}
-		else if((*plist)[head].service_time < compare_num && head > pivot_location){
+		else if((*plist)[head].priority < compare_num && head > pivot_location){
 			swap(&(*plist)[head], &(*plist)[pivot_location], sizeof((*plist)[head]), sizeof((*plist)[pivot_location]));
 			swap(&pivot_location, &head, sizeof(pivot_location), sizeof(head));
 			inc_dec *= -1;
@@ -63,6 +137,29 @@ void SortByRec(struct process** plist, int num, int range_lo, int range_hi){
 	}	
 	if(pivot_location > 0) SortByRec(&*plist, num, range_lo, pivot_location - 1);
 	if(pivot_location < NUM_PROCESS - 1) SortByRec(&*plist, num, pivot_location, range_hi);
+}
+
+if(num == 0){
+	compare_num = (*plist)[pivot_location].arrival_time;
+	while(TRUE){
+		if((*plist)[head].arrival_time > compare_num && head < pivot_location){
+			swap(&(*plist)[head], &(*plist)[pivot_location], sizeof((*plist)[head]), sizeof((*plist)[pivot_location]));
+			swap(&pivot_location, &head, sizeof(pivot_location), sizeof(head));
+			inc_dec *= -1;
+			head += inc_dec;
+		}
+		else if((*plist)[head].arrival_time < compare_num && head > pivot_location){
+			swap(&(*plist)[head], &(*plist)[pivot_location], sizeof((*plist)[head]), sizeof((*plist)[pivot_location]));
+			swap(&pivot_location, &head, sizeof(pivot_location), sizeof(head));
+			inc_dec *= -1;
+			head += inc_dec;
+		}
+		else head += inc_dec;
+		if(head == pivot_location) break;
+	}	
+	if(pivot_location > 0) SortByRec(&*plist, num, range_lo, pivot_location - 1);
+	if(pivot_location < NUM_PROCESS - 1) SortByRec(&*plist, num, pivot_location, range_hi);
+}
 	return;
 }
 

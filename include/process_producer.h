@@ -28,6 +28,6 @@ void PrintProcessList(struct process* a);
 * process is determined by the macro NUM_PROCESS and the max arrival time is determined by MAX_QUANTA
 */
 void CreateProcesses(struct process** process_list);
-void SortProcesses(struct process** process_list);
+//void SortProcesses(struct process** process_list);
 
 #endif

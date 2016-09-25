@@ -16,14 +16,10 @@ int main(){
 	srand(seed);
 	struct process* list;
 	CreateProcesses(&list);
-	SortProcesses(&list);
+	SortBy(&list, 0); //The input num decides what field to sort by 0 - arrival time; 1 - service time; 2 - priority
 	PrintProcessList(list);
-
 	printProcessTracker();
 	printFCFSOrder(list, NUM_PROCESS);
-
-	//SortBy(&list, 0);
-	//PrintProcessList(list);
 	return 1;
 }
 
@@ -32,7 +28,7 @@ int main(){
 * Can tell some processes don't start at arrival time because another process is still running
 */
 void printProcessTracker() {
-	printf("\nProcess Tracker (Hold control key and hit - key to zoom out in terminal to see)\n");
+	printf("\nProcess Tracker (Hold control key and hit - key to zoom out in terminal to see)\n"); // need a more elegant solution than this
 	for (int i = 0; i < MAX_QUANTA; i++) {
 		printf("%d ", i);
 	}
