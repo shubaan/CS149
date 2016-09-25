@@ -10,43 +10,59 @@ void SortBy(struct process** plist, int num){
 	int pivot_location = NUM_PROCESS - 1;
 	int head = 0;
 	int inc_dec = 1;
-	float service_time = (*plist)[pivot_location].service_time;
+	float compare_num = (*plist)[pivot_location].service_time;
 
 	while(TRUE){
-		if((*plist)[head].service_time > service_time && head < pivot_location){
+		if((*plist)[head].service_time > compare_num && head < pivot_location){
 			swap(&(*plist)[head], &(*plist)[pivot_location], sizeof((*plist)[head]), sizeof((*plist)[pivot_location]));
 			swap(&pivot_location, &head, sizeof(pivot_location), sizeof(head));
 			inc_dec *= -1;
 			head += inc_dec;
-			printf("Current Head: %d Current Pivot Location: %d\n", head, pivot_location);
 		}
-		else if((*plist)[head].service_time < service_time && head > pivot_location){
+		else if((*plist)[head].service_time < compare_num && head > pivot_location){
 			swap(&(*plist)[head], &(*plist)[pivot_location], sizeof((*plist)[head]), sizeof((*plist)[pivot_location]));
 			swap(&pivot_location, &head, sizeof(pivot_location), sizeof(head));
 			inc_dec *= -1;
 			head += inc_dec;
-			printf("Current Head: %d Current Pivot Location: %d\n", head, pivot_location);
-
 		}
 		else head += inc_dec;
-		PrintServiceTime(&*plist);
 		if(head == pivot_location) break;
 
 	}
 	//PIVOT LOCATION - 1 WHAT IF 0?
 
-	//REMOVE THIS
+	//TEST ORDER
+
+	if(pivot_location > 0) SortByRec(&*plist, num, 0, pivot_location);
+	if(pivot_location < NUM_PROCESS - 1) SortByRec(&*plist, num, pivot_location + 1, NUM_PROCESS - 1);
 	PrintServiceTime(&*plist);
-	//SortByRec(&*plist, num, 0, pivot_location);
-	//SortByRec(&*plist, num, pivot_location, NUM_PROCESS - 1);
 	return;
 }
 
 void SortByRec(struct process** plist, int num, int range_lo, int range_hi){
 	if(range_hi - range_lo <= 1) return;
+	int pivot_location = range_hi;
+	int head = range_lo;
+	int inc_dec = 1;
+	float compare_num = (*plist)[pivot_location].service_time;
 	while(TRUE){
-		break;
+		if((*plist)[head].service_time > compare_num && head < pivot_location){
+			swap(&(*plist)[head], &(*plist)[pivot_location], sizeof((*plist)[head]), sizeof((*plist)[pivot_location]));
+			swap(&pivot_location, &head, sizeof(pivot_location), sizeof(head));
+			inc_dec *= -1;
+			head += inc_dec;
+		}
+		else if((*plist)[head].service_time < compare_num && head > pivot_location){
+			swap(&(*plist)[head], &(*plist)[pivot_location], sizeof((*plist)[head]), sizeof((*plist)[pivot_location]));
+			swap(&pivot_location, &head, sizeof(pivot_location), sizeof(head));
+			inc_dec *= -1;
+			head += inc_dec;
+		}
+		else head += inc_dec;
+		if(head == pivot_location) break;
 	}	
+	if(pivot_location > 0) SortByRec(&*plist, num, range_lo, pivot_location - 1);
+	if(pivot_location < NUM_PROCESS - 1) SortByRec(&*plist, num, pivot_location, range_hi);
 	return;
 }
 
