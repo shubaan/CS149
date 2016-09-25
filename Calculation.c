@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "process_producer.h"
+#include "Calculation.h"
 
 float calAverageTurnaround(struct process plist[], int size) {	
 	float turnaroundTime = 0.0;
