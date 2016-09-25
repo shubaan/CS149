@@ -38,9 +38,9 @@ int calThroughput(char charArray[], int size) {
 	int throughput = size;
 	
 	if (charArray[100] != NULL) {
+		// One process was still running after [0-99] quanta
 		throughput = size - 1;
 	} else {
-		// One process was still running after [0-99] quanta
 		throughput = size;
 	}
 
