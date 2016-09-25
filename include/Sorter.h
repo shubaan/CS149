@@ -9,6 +9,11 @@
 */
 void SortBy(struct process** plist, int num);
 
+/* Function SortBy
+*  species a range of the array to consider. useful for recursive calls when using the quicksort algorithm
+*/
+void SortByRec(struct process** plist, int num, int range_lo, int range_hi);
+
 /* Function: swap
 *  swaps the 2 objects through the use of memcpy. size is important as it determines the amount of bytes to copy from 1 location.
 *  if the sizes are not equivilant no swap is done.

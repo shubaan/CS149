@@ -21,6 +21,13 @@ void SortBy(struct process** plist, int num){
 		if(head == pivot_location) break;
 		head += inc_dec;
 	}
+	//PIVOT LOCATION - 1 WHAT IF 0?
+	SortByRec(&*plist, num, 0, pivot_location);
+	SortByRec(&*plist, num, pivot_location, NUM_PROCESS - 1);
+	return;
+}
+
+void SortByRec(struct process** plist, int num, int range_lo, int range_hi){
 	return;
 }
 
