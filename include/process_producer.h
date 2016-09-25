@@ -1,8 +1,9 @@
 #ifndef PROCESS_PRODUCER
 #define PROCESS_PRODUCER
 
-#define NUM_PROCESS 15
+#define NUM_PROCESS 26
 #define MAX_QUANTA 100
+#define CHAR_ARRAYMAX 150
 
 /* Struct: process
 *  struct created in accordance to Ezzat's specifications
@@ -12,6 +13,8 @@ struct process{
 	float service_time;
 	int priority;
 	char name;
+	int actual_start_time;
+	int end_time;
 };
 
 /* Function: PrintProcessList
@@ -25,5 +28,6 @@ void PrintProcessList(struct process* a);
 * process is determined by the macro NUM_PROCESS and the max arrival time is determined by MAX_QUANTA
 */
 void CreateProcesses(struct process** process_list);
+void SortProcesses(struct process** process_list);
 
 #endif

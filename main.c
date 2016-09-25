@@ -4,7 +4,11 @@
 #include "RR.h"
 #include "process_producer.h"
 #include "Sorter.h"
+#include "Calculation.h"
 //TODO: CONGREGATE DEFINE DEFINTIONS IN OWN HEADERFILE
+
+void printProcessTracker();
+void printFCFSOrder(struct process** plist, int* size);
 
 int main(){
 	int seed = time(NULL);
@@ -14,11 +18,14 @@ int main(){
 	CreateProcesses(&list);
 	SortProcesses(&list);
 	PrintProcessList(list);
+	int numberOfCompletedProcess = 0;
 
 	printProcessTracker();
-	printFCFSOrder(list, NUM_PROCESS);
+	printFCFSOrder(list, numberOfCompletedProcess);
+
 	//SortBy(&list, 0);
 	//PrintProcessList(list);
+	return 1;
 }
 
 /*
@@ -26,19 +33,20 @@ int main(){
 * Can tell some processes don't start at arrival time because another process is still running
 */
 void printProcessTracker() {
-	for (int i = 0; i < 100; i++) {
+	printf("\nProcess Tracker (Hold control key and hit - key to zoom out in terminal to see)\n");
+	for (int i = 0; i < MAX_QUANTA; i++) {
 		printf("%d ", i);
 	}
 	printf("\n");
 }
 
 
-void printFCFSOrder(struct process plist[], int size) {
-	char *charArray = getFCFSOrder(plist, size);
+void printFCFSOrder(struct process** plist, int* size) {
+	char* charArray = getFCFSOrder(&plist, &size);
 
 	// Adjust to add extra spaces to match printProcessTracker();
 	// Char array doesn't have extra spaces to accommodate the difference
-	for (int i = 0; i < 100; i++) {
+	for (int i = 0; i < CHAR_ARRAYMAX; i++) {
 		if (charArray[i] == ' ' && i < 10) { 
 			printf("  ");
 		} else if (charArray[i] == ' ' && i >= 10) {
@@ -50,6 +58,11 @@ void printFCFSOrder(struct process plist[], int size) {
 		}
 	}
 	printf("\n");
+	// Size is now the # of processes that completed its process 
+	printf("Average response time: %.2f\n", calAverageResponse(plist, size));
+	printf("Average waiting time: %.2f\n", calAverageWaiting(plist, size));
+	printf("Average turnaround time: %.2f\n", calAverageTurnaround(plist, size));
+	printf("Throughput: %d\n", calThroughput(charArray, size));
 
 	free(charArray);
 }

@@ -6,5 +6,7 @@
 *  TODO//currently doesn't work because it doesn't take into account arrival time
 */
 void FirstCome(struct process* plist, float* runtime);
+char* getFCFSOrder(struct process** plist, int *size);
+
 
 #endif
