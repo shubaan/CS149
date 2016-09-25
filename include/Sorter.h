@@ -14,6 +14,10 @@ void SortBy(struct process** plist, int num);
 */
 void SortByRec(struct process** plist, int num, int range_lo, int range_hi);
 
+// DELETE THIS FUNCTION
+
+void PrintServiceTime(struct process** plist);
+
 /* Function: swap
 *  swaps the 2 objects through the use of memcpy. size is important as it determines the amount of bytes to copy from 1 location.
 *  if the sizes are not equivilant no swap is done.

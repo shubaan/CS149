@@ -7,28 +7,54 @@
 #define FALSE 0
 
 void SortBy(struct process** plist, int num){
-	int pivot_location = NUM_PROCESS - 2;
-	int head = 0, temp;
+	int pivot_location = NUM_PROCESS - 1;
+	int head = 0;
 	int inc_dec = 1;
 	float service_time = (*plist)[pivot_location].service_time;
+
 	while(TRUE){
-		if((*plist)[head].service_time > service_time){
+		if((*plist)[head].service_time > service_time && head < pivot_location){
 			swap(&(*plist)[head], &(*plist)[pivot_location], sizeof((*plist)[head]), sizeof((*plist)[pivot_location]));
 			swap(&pivot_location, &head, sizeof(pivot_location), sizeof(head));
 			inc_dec *= -1;
 			head += inc_dec;
+			printf("Current Head: %d Current Pivot Location: %d\n", head, pivot_location);
 		}
+		else if((*plist)[head].service_time < service_time && head > pivot_location){
+			swap(&(*plist)[head], &(*plist)[pivot_location], sizeof((*plist)[head]), sizeof((*plist)[pivot_location]));
+			swap(&pivot_location, &head, sizeof(pivot_location), sizeof(head));
+			inc_dec *= -1;
+			head += inc_dec;
+			printf("Current Head: %d Current Pivot Location: %d\n", head, pivot_location);
+
+		}
+		else head += inc_dec;
+		PrintServiceTime(&*plist);
 		if(head == pivot_location) break;
-		head += inc_dec;
+
 	}
 	//PIVOT LOCATION - 1 WHAT IF 0?
-	SortByRec(&*plist, num, 0, pivot_location);
-	SortByRec(&*plist, num, pivot_location, NUM_PROCESS - 1);
+
+	//REMOVE THIS
+	PrintServiceTime(&*plist);
+	//SortByRec(&*plist, num, 0, pivot_location);
+	//SortByRec(&*plist, num, pivot_location, NUM_PROCESS - 1);
 	return;
 }
 
 void SortByRec(struct process** plist, int num, int range_lo, int range_hi){
+	if(range_hi - range_lo <= 1) return;
+	while(TRUE){
+		break;
+	}	
 	return;
+}
+
+void PrintServiceTime(struct process** plist){
+	for(int x = 0; x < NUM_PROCESS; x++){
+		printf("%.2f, ", (*plist)[x].service_time);
+	}
+	printf("\n");
 }
 
 void swap(void* objA, void* objB, size_t size_objA, size_t size_objB){
