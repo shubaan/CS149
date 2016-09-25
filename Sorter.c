@@ -7,10 +7,20 @@
 #define FALSE 0
 
 void SortBy(struct process** plist, int num){
-	int pivot_location = (int) (NUM_PROCESS / 2);
-	int hi = NUM_PROCESS - 1;
-	int lo = 0;
+	int pivot_location = NUM_PROCESS - 2;
+	int head = 0, temp;
+	int inc_dec = 1;
 	float service_time = (*plist)[pivot_location].service_time;
+	while(TRUE){
+		if((*plist)[head].service_time > service_time){
+			swap(&(*plist)[head], &(*plist)[pivot_location], sizeof((*plist)[head]), sizeof((*plist)[pivot_location]));
+			swap(&pivot_location, &head, sizeof(pivot_location), sizeof(head));
+			inc_dec *= -1;
+			head += inc_dec;
+		}
+		if(head == pivot_location) break;
+		head += inc_dec;
+	}
 	return;
 }
 
