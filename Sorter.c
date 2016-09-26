@@ -62,7 +62,7 @@ void SortBy(struct process** plist, int num){
 	
 	}
 
-	else if(num == 0){
+	else if(num == 0){// arrival_time
 		compare_num = (*plist)[pivot_location].arrival_time;
 			while(TRUE){
 		if((*plist)[head].arrival_time > compare_num && head < pivot_location){
@@ -86,6 +86,57 @@ void SortBy(struct process** plist, int num){
 	if(pivot_location < NUM_PROCESS - 1) SortByRec(&*plist, num, pivot_location + 1, NUM_PROCESS - 1);
 	
 	}
+
+	else if(num == 3){//actual start time
+		compare_num = (*plist)[pivot_location].actual_start_time;
+			while(TRUE){
+		if((*plist)[head].actual_start_time > compare_num && head < pivot_location){
+			swap(&(*plist)[head], &(*plist)[pivot_location], sizeof((*plist)[head]), sizeof((*plist)[pivot_location]));
+			swap(&pivot_location, &head, sizeof(pivot_location), sizeof(head));
+			inc_dec *= -1;
+			head += inc_dec;
+		}
+		else if((*plist)[head].actual_start_time < compare_num && head > pivot_location){
+			swap(&(*plist)[head], &(*plist)[pivot_location], sizeof((*plist)[head]), sizeof((*plist)[pivot_location]));
+			swap(&pivot_location, &head, sizeof(pivot_location), sizeof(head));
+			inc_dec *= -1;
+			head += inc_dec;
+		}
+		else head += inc_dec;
+		if(head == pivot_location) break;
+
+	}
+
+	if(pivot_location > 0) SortByRec(&*plist, num, 0, pivot_location);
+	if(pivot_location < NUM_PROCESS - 1) SortByRec(&*plist, num, pivot_location + 1, NUM_PROCESS - 1);
+	
+	}
+
+	else if(num == 4){//actual start time
+		compare_num = (*plist)[pivot_location].end_time;
+			while(TRUE){
+		if((*plist)[head].end_time > compare_num && head < pivot_location){
+			swap(&(*plist)[head], &(*plist)[pivot_location], sizeof((*plist)[head]), sizeof((*plist)[pivot_location]));
+			swap(&pivot_location, &head, sizeof(pivot_location), sizeof(head));
+			inc_dec *= -1;
+			head += inc_dec;
+		}
+		else if((*plist)[head].end_time < compare_num && head > pivot_location){
+			swap(&(*plist)[head], &(*plist)[pivot_location], sizeof((*plist)[head]), sizeof((*plist)[pivot_location]));
+			swap(&pivot_location, &head, sizeof(pivot_location), sizeof(head));
+			inc_dec *= -1;
+			head += inc_dec;
+		}
+		else head += inc_dec;
+		if(head == pivot_location) break;
+
+	}
+
+	if(pivot_location > 0) SortByRec(&*plist, num, 0, pivot_location);
+	if(pivot_location < NUM_PROCESS - 1) SortByRec(&*plist, num, pivot_location + 1, NUM_PROCESS - 1);
+	
+	}
+
 	return;
 }
 
@@ -160,9 +211,56 @@ if(num == 0){
 	if(pivot_location > 0) SortByRec(&*plist, num, range_lo, pivot_location - 1);
 	if(pivot_location < NUM_PROCESS - 1) SortByRec(&*plist, num, pivot_location, range_hi);
 }
+
+if(num == 3){
+	compare_num = (*plist)[pivot_location].actual_start_time;
+	while(TRUE){
+		if((*plist)[head].actual_start_time > compare_num && head < pivot_location){
+			swap(&(*plist)[head], &(*plist)[pivot_location], sizeof((*plist)[head]), sizeof((*plist)[pivot_location]));
+			swap(&pivot_location, &head, sizeof(pivot_location), sizeof(head));
+			inc_dec *= -1;
+			head += inc_dec;
+		}
+		else if((*plist)[head].actual_start_time < compare_num && head > pivot_location){
+			swap(&(*plist)[head], &(*plist)[pivot_location], sizeof((*plist)[head]), sizeof((*plist)[pivot_location]));
+			swap(&pivot_location, &head, sizeof(pivot_location), sizeof(head));
+			inc_dec *= -1;
+			head += inc_dec;
+		}
+		else head += inc_dec;
+		if(head == pivot_location) break;
+	}	
+	if(pivot_location > 0) SortByRec(&*plist, num, range_lo, pivot_location - 1);
+	if(pivot_location < NUM_PROCESS - 1) SortByRec(&*plist, num, pivot_location, range_hi);
+}
+
+if(num == 4){
+	compare_num = (*plist)[pivot_location].end_time;
+	while(TRUE){
+		if((*plist)[head].end_time > compare_num && head < pivot_location){
+			swap(&(*plist)[head], &(*plist)[pivot_location], sizeof((*plist)[head]), sizeof((*plist)[pivot_location]));
+			swap(&pivot_location, &head, sizeof(pivot_location), sizeof(head));
+			inc_dec *= -1;
+			head += inc_dec;
+		}
+		else if((*plist)[head].end_time < compare_num && head > pivot_location){
+			swap(&(*plist)[head], &(*plist)[pivot_location], sizeof((*plist)[head]), sizeof((*plist)[pivot_location]));
+			swap(&pivot_location, &head, sizeof(pivot_location), sizeof(head));
+			inc_dec *= -1;
+			head += inc_dec;
+		}
+		else head += inc_dec;
+		if(head == pivot_location) break;
+	}	
+	if(pivot_location > 0) SortByRec(&*plist, num, range_lo, pivot_location - 1);
+	if(pivot_location < NUM_PROCESS - 1) SortByRec(&*plist, num, pivot_location, range_hi);
+}
+
 	return;
 }
 
+
+//ONLY FOR TESTING
 void PrintServiceTime(struct process** plist){
 	for(int x = 0; x < NUM_PROCESS; x++){
 		printf("%.2f, ", (*plist)[x].service_time);
