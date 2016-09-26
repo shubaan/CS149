@@ -25,14 +25,15 @@ void FirstCome(struct process* plist, float* runtime){
 	return;
 }
 
-char* getFCFSOrder(struct process** plist, int *size) {
+char* getFCFSOrder(struct process** plist, int* size) {
 
 	int numberOfProcessCompleted = 0;
 	char *arrayFCFSOrder = malloc(sizeof(char) * CHAR_ARRAYMAX); // Allocate enough to leave spaces for last process to finish 
 
-	*size = 0;
+	*size = 0; //cant change #define
 
 	int quanta = 0;
+
 	for (int i = 0; i < size; i++) {
 
 		while ((*plist)[i].arrival_time > quanta && (quanta < MAX_QUANTA)) { 
@@ -53,7 +54,8 @@ char* getFCFSOrder(struct process** plist, int *size) {
 
 		// Actual end time after service time is finished
 		(*plist)[i].end_time = quanta - 1;
-		*size += 1;
+
+		*size += 1; //cant change #define
 
 		if (quanta > MAX_QUANTA - 1) {
 			break;
