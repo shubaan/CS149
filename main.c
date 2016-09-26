@@ -38,7 +38,7 @@ void printProcessTracker() {
 
 void printFCFSOrder(struct process** plist) {
 
-	int* size;
+	int size = 0;
 	char* charArray = getFCFSOrder(&plist, &size);
 
 	// Adjust to add extra spaces to match printProcessTracker();
