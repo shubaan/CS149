@@ -18,8 +18,11 @@ int main(){
 	CreateProcesses(&list);
 	PrintProcessList(list);
 	SortBy(&list, 0); //The input num decides what field to sort by 0 - arrival time; 1 - service time; 2 - priority; 3 - actual arrival time; 4 - end time
+	//FIRST COME FIRST SERVE RUN
 	printProcessTracker();
 	printFCFSOrder(list, NUM_PROCESS);
+	//ROUND ROBIN RUN
+	RoundRobin(&list);
 	return 1;
 }
 
