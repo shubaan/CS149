@@ -8,7 +8,7 @@
 //TODO: CONGREGATE DEFINE DEFINTIONS IN OWN HEADERFILE
 
 void printProcessTracker();
-void printFCFSOrder(struct process** plist);
+void printFCFSOrder(struct process** plist, int size);
 
 int main(){
 	int seed = time(NULL);
@@ -18,10 +18,8 @@ int main(){
 	CreateProcesses(&list);
 	PrintProcessList(list);
 	SortBy(&list, 0); //The input num decides what field to sort by 0 - arrival time; 1 - service time; 2 - priority; 3 - actual arrival time; 4 - end time
-	//FIRST COME FIRST SERVE RUN
 	printProcessTracker();
-	printFCFSOrder(list, NUM_PROCESS);
-	//ROUND ROBIN RUN
+	printFCFSOrder(list);
 	RoundRobin(list);
 	return 1;
 }
@@ -39,9 +37,8 @@ void printProcessTracker() {
 }
 
 
-void printFCFSOrder(struct process** plist) {
+void printFCFSOrder(struct process** plist, int size) {
 
-	int size = 0;
 	char* charArray = getFCFSOrder(&plist, &size);
 
 	// Adjust to add extra spaces to match printProcessTracker();
