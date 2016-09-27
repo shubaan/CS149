@@ -8,7 +8,7 @@
 //TODO: CONGREGATE DEFINE DEFINTIONS IN OWN HEADERFILE
 
 void printProcessTracker();
-void printFCFSOrder(struct process** plist, int size);
+void printFCFSOrder(struct process** plist);
 
 int main(){
 	int seed = time(NULL);
@@ -39,8 +39,9 @@ void printProcessTracker() {
 }
 
 
-void printFCFSOrder(struct process** plist, int size) {
+void printFCFSOrder(struct process** plist) {
 
+	int size = 0;
 	char* charArray = getFCFSOrder(&plist, &size);
 
 	// Adjust to add extra spaces to match printProcessTracker();
