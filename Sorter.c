@@ -141,7 +141,7 @@ void SortBy(struct process** plist, int num){
 }
 
 void SortByRec(struct process** plist, int num, int range_lo, int range_hi){
-	if(range_hi - range_lo <= 1) return;
+	if(range_hi - range_lo < 1) return;
 	int pivot_location = range_hi;
 	int head = range_lo;
 	int inc_dec = 1;
