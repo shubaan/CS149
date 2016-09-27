@@ -15,9 +15,12 @@ void RoundRobin(struct process* o_plist){ //original plist. Gonna use copy so th
 //ADD TEST IF MAX_QUANTA LESS THAN NUM_PROCESS
 	struct process* plist = malloc(sizeof(struct process) * NUM_PROCESS);
 	memcpy(plist, o_plist, sizeof(struct process) * NUM_PROCESS);
+
+	printf("---------------------------------------\n");
+
 	SortBy(&plist, 0); // in case not sorted by arrival time
 	quanta = plist[0].arrival_time; //Set time to when first proces arrives
-	
+	PrintProcessList(o_plist);
 
 	while(counter_char_array < quanta){
 		rr_process_order[counter_char_array] = ' ';
@@ -38,6 +41,11 @@ void RoundRobin(struct process* o_plist){ //original plist. Gonna use copy so th
 			else queue[x] = 0;
 		}
 
+		// just for testing purposes
+		//for(int x = 0; x < NUM_PROCESS; x++){
+			//printf("%d  ", queue[x]);
+		//}
+		
 		if(available_service == 0){
 			quanta += 1;
 			//available_service = 0; not needed
@@ -56,15 +64,18 @@ void RoundRobin(struct process* o_plist){ //original plist. Gonna use copy so th
 	}
 
 	// print all quanta slices
+	printf("\n");
 	for(int x = 0; x < MAX_QUANTA; x++){
-		printf("%d ", x);
+		printf("%02d ", x);
+		if(x % 31 == 0) printf("\n");
 	}
 
 	//print order of processes according to time
 	printf("\n");
 
 	for(int x = 0; x < CHAR_ARRAYMAX; x++){
-		printf("%c ", rr_process_order[x]);
+		printf("%c  ", rr_process_order[x]);
+		if(x % 31 == 0) printf("\n");
 	}
 
 	free(plist);
