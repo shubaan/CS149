@@ -22,7 +22,7 @@ int main(){
 	printProcessTracker();
 	printFCFSOrder(list, NUM_PROCESS);
 	//ROUND ROBIN RUN
-	RoundRobin(&list);
+	RoundRobin(list);
 	return 1;
 }
 
