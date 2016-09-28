@@ -15,11 +15,15 @@ int main(){
 	float runtime;
 	srand(seed);
 	struct process* list;
+	struct process* copy_list = malloc(sizeof(struct process) * NUM_PROCESS);
 	CreateProcesses(&list);
 	PrintProcessList(list);
-	SortBy(&list, 0); //The input num decides what field to sort by 0 - arrival time; 1 - service time; 2 - priority; 3 - actual arrival time; 4 - end time
+	memcpy(copy_list, list, sizeof(struct process) * NUM_PROCESS);
+	SortBy(&copy_list, 0); //The input num decides what field to sort by 0 - arrival time; 1 - service time; 2 - priority; 3 - actual start; 4 - end time
 	printProcessTracker();
-	printFCFSOrder(list);
+	printFCFSOrder(copy_list);
+	free(copy_list);
+	RoundRobin(list);
 	return 1;
 }
 
