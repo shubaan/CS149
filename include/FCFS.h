@@ -12,7 +12,7 @@ void FirstCome(struct process* plist, float* runtime);
 /* Function: getFCFSOrder
 *  currently used first serve first come
 */
-char* getFCFSOrder(struct process** plist, int* size);
+char* getFCFSOrder(struct process** plist, int size);
 
 #endif
 
