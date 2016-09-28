@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "process_producer.h"
-
 #define TRUE 1
 #define FALSE 0
 
@@ -25,16 +25,14 @@ void FirstCome(struct process* plist, float* runtime){
 	return;
 }
 
-char* getFCFSOrder(struct process** plist, int* size) {
+char* getFCFSOrder(struct process** plist, int size) {
 
 	int numberOfProcessCompleted = 0;
-	char *arrayFCFSOrder = malloc(sizeof(char) * CHAR_ARRAYMAX); // Allocate enough to leave spaces for last process to finish 
-
-	int var_size = 0; //doesn't make sense
-
+	char* arrayFCFSOrder = malloc(sizeof(char) * CHAR_ARRAYMAX); // Allocate enough to leave spaces for last process to finish 
+	memset(arrayFCFSOrder, 32, sizeof(char) * CHAR_ARRAYMAX);
 	int quanta = 0;
 
-	for (int i = 0; i < *size; i++) {
+	for (int i = 0; i < size; i++) {
 
 		while ((*plist)[i].arrival_time > quanta && (quanta < MAX_QUANTA)) { 
 		// Keep looping because the process hasn't arrived
@@ -55,12 +53,13 @@ char* getFCFSOrder(struct process** plist, int* size) {
 		// Actual end time after service time is finished
 		(*plist)[i].end_time = quanta - 1;
 
-		var_size += 1;
-
 		if (quanta > MAX_QUANTA - 1) {
 			break;
 		}
 	}
+
+	PrintProcessList(*plist);
+
 	return arrayFCFSOrder;
 }
 

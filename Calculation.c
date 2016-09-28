@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "process_producer.h"
-#include "Calculation.h"
 
 float calAverageTurnaround(struct process plist[], int size) {	
 	float turnaroundTime = 0.0;
@@ -40,7 +39,7 @@ int calThroughput(char charArray[], int size) {
 	// Only processes that are completed before the [0-99] quanta range are counted.
 	int throughput = size;
 	
-	if (charArray[100] != NULL) { // this is doesn't make sense
+	if (charArray[100] != ' ') {
 		// One process was still running after [0-99] quanta
 		throughput = size - 1;
 	} else {
