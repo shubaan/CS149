@@ -91,9 +91,7 @@ void RoundRobin(struct process* o_plist){ //original plist. Gonna use copy so th
 	// Take directly from Ravuth's code in main.c for the FCFS algorithm
 	printf("\n");
 
-	PrintProcessList(plist);
-
-	printf("process completed: %d", process_completed);
+	//PrintProcessList(plist);
 
 	// Size is now the # of processes that completed its process 
 	printf("Average response time: %.2f\n", calAverageResponse(plist, process_completed));
