@@ -58,7 +58,7 @@ char* getFCFSOrder(struct process** plist, int size) {
 		}
 	}
 
-	PrintProcessList(*plist);
+	//PrintProcessList(*plist);
 
 	return arrayFCFSOrder;
 }
