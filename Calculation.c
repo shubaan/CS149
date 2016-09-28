@@ -20,8 +20,6 @@ float calAverageWaiting(struct process plist[], int size) {
 		avgWaiting += plist[i].actual_start_time - plist[i].arrival_time;
 	}
 
-	printf("Waiting: %f\n", avgWaiting);
-
 	return (avgWaiting / size);
 }
 
