@@ -20,6 +20,9 @@ float calAverageWaiting(struct process plist[], int size) {
 		// Waiting time is the time to wait to start
 		avgWaiting += plist[i].actual_start_time - plist[i].arrival_time;
 	}
+
+	printf("Waiting: %f\n", avgWaiting);
+
 	return (avgWaiting / size);
 }
 
@@ -37,7 +40,7 @@ int calThroughput(char charArray[], int size) {
 	// Only processes that are completed before the [0-99] quanta range are counted.
 	int throughput = size;
 	
-	if (charArray[100] != NULL) {
+	if (charArray[100] != NULL) { // this is doesn't make sense
 		// One process was still running after [0-99] quanta
 		throughput = size - 1;
 	} else {
