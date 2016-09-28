@@ -22,8 +22,7 @@ int main(){
 	SortBy(&copy_list, 0); //The input num decides what field to sort by 0 - arrival time; 1 - service time; 2 - priority; 3 - actual start; 4 - end time
 	printProcessTracker();
 	printFCFSOrder(copy_list);
-	free(copy_list);
-	//RoundRobin(list);
+	RoundRobin(list);
 	return 1;
 }
 
@@ -59,9 +58,6 @@ void printFCFSOrder(struct process* plist) {
 		}
 	}
 	printf("\n");
-	
-	PrintProcessList(plist);
-
 	// Size is now the # of processes that completed its process 
 	printf("Average response time: %.2f\n", calAverageResponse(plist, process_ran));
 	printf("Average waiting time: %.2f\n", calAverageWaiting(plist, process_ran));
