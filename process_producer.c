@@ -6,7 +6,7 @@
 //TODO CHANGE SO IT DOESN'T INCLUDE ACTUAL
 void PrintProcessList(struct process process_list[]){
 	for(int x = 0; x < NUM_PROCESS; x++){
-		printf("%c: Service Time: %.1f Priority: %02d Arrival Time: %02d Actual Start Time: %02d End Time %02d\n", process_list[x].name, process_list[x].service_time, process_list[x].priority, process_list[x].arrival_time, process_list[x].actual_start_time, process_list[x].end_time);
+		printf("%c: Service Time: %.1f Priority: %02d Arrival Time: %02d\n", process_list[x].name, process_list[x].service_time, process_list[x].priority, process_list[x].arrival_time);
 	}
 }
 
