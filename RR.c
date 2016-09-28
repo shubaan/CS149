@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include "Sorter.h"
 #include "Calculation.h"
-#include "RR.h"
 #define TRUE 1 //add header to store define variables
 
 void RoundRobin(struct process* o_plist){ //original plist. Gonna use copy so the arrays can be modified in the funciton
@@ -34,7 +33,7 @@ void RoundRobin(struct process* o_plist){ //original plist. Gonna use copy so th
 		//Checks how many processes are currently in queued, if there is a 1 in the array slot, there is process that has both arrived and has positive service time - can change to do so it always runs once
 		for(int x = 0; x < NUM_PROCESS; x++){
 			if(plist[(x + head) % NUM_PROCESS].service_time == 0) queue[x] = 0;
-			else if(plist[(x + head) % NUM_PROCESS].service_time > 0 && plist[(x + head) % NUM_PROCESS].arrival_time <= quanta){
+			else if( (plist[(x + head) % NUM_PROCESS].service_time > 0) && (plist[(x + head) % NUM_PROCESS].arrival_time <= quanta) ){
 				if(start_time_counter[(x + head) % NUM_PROCESS] < quanta){
 					start_time_counter[(x + head) % NUM_PROCESS] = quanta;
 					plist[(x + head) % NUM_PROCESS].actual_start_time = quanta;
@@ -70,6 +69,7 @@ void RoundRobin(struct process* o_plist){ //original plist. Gonna use copy so th
 		}
 		quanta++;
 		head = (head + 1) % NUM_PROCESS;
+		available_service = 0;
 	}
 
 	// print all quanta slices
@@ -89,6 +89,9 @@ void RoundRobin(struct process* o_plist){ //original plist. Gonna use copy so th
 
 	// Take directly from Ravuth's code in main.c for the FCFS algorithm
 	printf("\n");
+
+	PrintProcessList(plist);
+
 	// Size is now the # of processes that completed its process 
 	printf("Average response time: %.2f\n", calAverageResponse(plist, NUM_PROCESS));
 	printf("Average waiting time: %.2f\n", calAverageWaiting(plist, NUM_PROCESS));
