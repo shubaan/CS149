@@ -4,12 +4,15 @@
 
 float calAverageTurnaround(struct process plist[], int size) {	
 	float turnaroundTime = 0.0;
-
+	int incomplete_process = 0;
 	for (int i = 0; i < size; i++) {
 		// Turn around time is the time from the arrival to end of a process
+		if(plist[i].end_time > plist[i].arrival_time){
 		turnaroundTime += plist[i].end_time - plist[i].arrival_time;
+		}
+		else incomplete_process++;
 	}
-	return (turnaroundTime / size);
+	return (turnaroundTime / (size - incomplete_process));
 }
 
 float calAverageWaiting(struct process plist[], int size) {
@@ -17,7 +20,7 @@ float calAverageWaiting(struct process plist[], int size) {
 
 	for (int i = 0; i < size; i++) {
 		// Waiting time is the time to wait to start
-		avgWaiting += plist[i].actual_start_time - plist[i].arrival_time;
+		avgWaiting += plist[i].actual_start_time - plist[i].arrival_time;//adjust to throw error if actual is lower than arrival?
 	}
 
 	return (avgWaiting / size);
@@ -25,12 +28,15 @@ float calAverageWaiting(struct process plist[], int size) {
 
 float calAverageResponse(struct process plist[], int size) {
 	float responseTime = 0.0;
-
+	int incomplete_process = 0;
 	for (int i = 0; i < size; i++) {
 		// Response time is the actual starting time to when the first output is produced
+		if(plist[i].end_time > plist[i].arrival_time){
 		responseTime += plist[i].end_time - plist[i].actual_start_time;
+		}
+		else incomplete_process++;
 	}
-	return (responseTime / size);
+	return (responseTime / (size - incomplete_process));
 }
 
 int calThroughput(char charArray[], int size) {
