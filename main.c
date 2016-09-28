@@ -23,7 +23,7 @@ int main(){
 	printProcessTracker();
 	printFCFSOrder(copy_list);
 	free(copy_list);
-	RoundRobin(list);
+	//RoundRobin(list);
 	return 1;
 }
 
@@ -42,7 +42,8 @@ void printProcessTracker() {
 
 void printFCFSOrder(struct process* plist) {
 
-	char* charArray = getFCFSOrder(&plist, NUM_PROCESS);
+	int process_ran;
+	char* charArray = getFCFSOrder(&plist, &process_ran);
 
 	// Adjust to add extra spaces to match printProcessTracker();
 	// Char array doesn't have extra spaces to accommodate the difference
@@ -58,11 +59,14 @@ void printFCFSOrder(struct process* plist) {
 		}
 	}
 	printf("\n");
+	
+	PrintProcessList(plist);
+
 	// Size is now the # of processes that completed its process 
-	printf("Average response time: %.2f\n", calAverageResponse(plist, NUM_PROCESS));
-	printf("Average waiting time: %.2f\n", calAverageWaiting(plist, NUM_PROCESS));
-	printf("Average turnaround time: %.2f\n", calAverageTurnaround(plist, NUM_PROCESS));
-	printf("Throughput: %d\n", calThroughput(charArray, NUM_PROCESS));
+	printf("Average response time: %.2f\n", calAverageResponse(plist, process_ran));
+	printf("Average waiting time: %.2f\n", calAverageWaiting(plist, process_ran));
+	printf("Average turnaround time: %.2f\n", calAverageTurnaround(plist, process_ran));
+	printf("Throughput: %d\n", calThroughput(charArray, process_ran));
 
 	free(charArray);
 }
