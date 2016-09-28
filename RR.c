@@ -81,5 +81,6 @@ void RoundRobin(struct process* o_plist){ //original plist. Gonna use copy so th
 
 	free(plist);
 	free(rr_process_order);
+	printf("\n");
 	return;
 }
