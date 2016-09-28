@@ -8,10 +8,10 @@
 //TODO: CONGREGATE DEFINE DEFINTIONS IN OWN HEADERFILE
 
 void printProcessTracker();
-void printFCFSOrder(struct process** plist);
+void printFCFSOrder(struct process* plist);
 
 int main(){
-	int seed = time(NULL);
+	int seed = 0;
 	float runtime;
 	srand(seed);
 	struct process* list;
@@ -40,10 +40,9 @@ void printProcessTracker() {
 }
 
 
-void printFCFSOrder(struct process** plist) {
+void printFCFSOrder(struct process* plist) {
 
-	int* size;
-	char* charArray = getFCFSOrder(&plist, &size);
+	char* charArray = getFCFSOrder(&plist, NUM_PROCESS);
 
 	// Adjust to add extra spaces to match printProcessTracker();
 	// Char array doesn't have extra spaces to accommodate the difference
@@ -60,10 +59,10 @@ void printFCFSOrder(struct process** plist) {
 	}
 	printf("\n");
 	// Size is now the # of processes that completed its process 
-	printf("Average response time: %.2f\n", calAverageResponse(plist, size));
-	printf("Average waiting time: %.2f\n", calAverageWaiting(plist, size));
-	printf("Average turnaround time: %.2f\n", calAverageTurnaround(plist, size));
-	printf("Throughput: %d\n", calThroughput(charArray, size));
+	printf("Average response time: %.2f\n", calAverageResponse(plist, NUM_PROCESS));
+	printf("Average waiting time: %.2f\n", calAverageWaiting(plist, NUM_PROCESS));
+	printf("Average turnaround time: %.2f\n", calAverageTurnaround(plist, NUM_PROCESS));
+	printf("Throughput: %d\n", calThroughput(charArray, NUM_PROCESS));
 
 	free(charArray);
 }
