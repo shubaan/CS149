@@ -1,18 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "process_producer.h"
 #include "Sorter.h"
-
+#include "Calculation.h"
+#include "RR.h"
 #define TRUE 1 //add header to store define variables
 
 void RoundRobin(struct process* o_plist){ //original plist. Gonna use copy so the arrays can be modified in the funciton
 	int counter_char_array = 0;
 	int counter_process = 0;
 	int queue[NUM_PROCESS] = {0};
+	int start_time_counter[NUM_PROCESS] = {0};
 	int available_service = 0;
 	int quanta;
 	int head = 0; //start at beginning
-	char* rr_process_order = malloc(sizeof(char) * CHAR_ARRAYMAX);
+	char rr_process_order[CHAR_ARRAYMAX] = {' '};
 //ADD TEST IF MAX_QUANTA LESS THAN NUM_PROCESS
 	struct process* plist = malloc(sizeof(struct process) * NUM_PROCESS);
 	memcpy(plist, o_plist, sizeof(struct process) * NUM_PROCESS);
@@ -34,6 +35,10 @@ void RoundRobin(struct process* o_plist){ //original plist. Gonna use copy so th
 		for(int x = 0; x < NUM_PROCESS; x++){
 			if(plist[(x + head) % NUM_PROCESS].service_time == 0) queue[x] = 0;
 			else if(plist[(x + head) % NUM_PROCESS].service_time > 0 && plist[(x + head) % NUM_PROCESS].arrival_time <= quanta){
+				if(start_time_counter[(x + head) % NUM_PROCESS] < quanta){
+					start_time_counter[(x + head) % NUM_PROCESS] = quanta;
+					plist[(x + head) % NUM_PROCESS].actual_start_time = quanta;
+				}
 				queue[(x + head) % NUM_PROCESS] = 1;
 				available_service = 1;
 				head = (x + head) % NUM_PROCESS;
@@ -55,7 +60,10 @@ void RoundRobin(struct process* o_plist){ //original plist. Gonna use copy so th
 			counter_char_array++;
 		}
 		else if(queue[head] == 1){
-			if(plist[head].service_time < 1) plist[head].service_time = 0;
+			if(plist[head].service_time < 1){
+				plist[head].service_time = 0;
+				plist[head].end_time = quanta;
+			}
 			else plist[head].service_time -= 1;
 			rr_process_order[counter_char_array] = plist[head].name;
 			counter_char_array++;
@@ -79,8 +87,18 @@ void RoundRobin(struct process* o_plist){ //original plist. Gonna use copy so th
 		if(x % 31 == 0) printf("\n");
 	}
 
+	// Take directly from Ravuth's code in main.c for the FCFS algorithm
+	printf("\n");
+	// Size is now the # of processes that completed its process 
+	printf("Average response time: %.2f\n", calAverageResponse(plist, NUM_PROCESS));
+	printf("Average waiting time: %.2f\n", calAverageWaiting(plist, NUM_PROCESS));
+	printf("Average turnaround time: %.2f\n", calAverageTurnaround(plist, NUM_PROCESS));
+	printf("Throughput: %d\n", calThroughput(rr_process_order, NUM_PROCESS));
+
+	//PrintProcessList(plist);
+
 	free(plist);
-	free(rr_process_order);
+
 	printf("\n");
 	return;
 }
