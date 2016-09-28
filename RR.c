@@ -22,7 +22,6 @@ void RoundRobin(struct process* o_plist){ //original plist. Gonna use copy so th
 
 	SortBy(&plist, 0); // in case not sorted by arrival time
 	quanta = plist[0].arrival_time; //Set time to when first proces arrives
-	PrintProcessList(o_plist);
 
 	while(counter_char_array < quanta){
 		rr_process_order[counter_char_array] = ' ';
@@ -35,7 +34,7 @@ void RoundRobin(struct process* o_plist){ //original plist. Gonna use copy so th
 		for(int x = 0; x < NUM_PROCESS; x++){
 			if(plist[(x + head) % NUM_PROCESS].service_time == 0) queue[x] = 0;
 			else if( (plist[(x + head) % NUM_PROCESS].service_time > 0) && (plist[(x + head) % NUM_PROCESS].arrival_time <= quanta) ){
-				if(start_time_counter[(x + head) % NUM_PROCESS] < quanta){
+				if(start_time_counter[(x + head) % NUM_PROCESS] == 0){
 					start_time_counter[(x + head) % NUM_PROCESS] = quanta;
 					plist[(x + head) % NUM_PROCESS].actual_start_time = quanta;
 				}
@@ -60,7 +59,7 @@ void RoundRobin(struct process* o_plist){ //original plist. Gonna use copy so th
 			counter_char_array++;
 		}
 		else if(queue[head] == 1){
-			if(plist[head].service_time < 1){
+			if(plist[head].service_time <= 1){
 				plist[head].service_time = 0;
 				plist[head].end_time = quanta;
 				process_completed++;
@@ -94,13 +93,15 @@ void RoundRobin(struct process* o_plist){ //original plist. Gonna use copy so th
 
 	PrintProcessList(plist);
 
+	printf("process completed: %d", process_completed);
+
 	// Size is now the # of processes that completed its process 
 	printf("Average response time: %.2f\n", calAverageResponse(plist, process_completed));
 	printf("Average waiting time: %.2f\n", calAverageWaiting(plist, process_completed));
 	printf("Average turnaround time: %.2f\n", calAverageTurnaround(plist, process_completed));
 	printf("Throughput: %d\n", calThroughput(rr_process_order, process_completed));
 
-	//PrintProcessList(plist);
+
 
 	free(plist);
 
