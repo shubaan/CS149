@@ -5,6 +5,7 @@
 #include "process_producer.h"
 #include "Sorter.h"
 #include "Calculation.h"
+#include <time.h>
 //TODO: CONGREGATE DEFINE DEFINTIONS IN OWN HEADERFILE
 
 void printProcessTracker();
@@ -20,8 +21,12 @@ int main(){
 	PrintProcessList(list);
 	memcpy(copy_list, list, sizeof(struct process) * NUM_PROCESS);
 	SortBy(&copy_list, 0); //The input num decides what field to sort by 0 - arrival time; 1 - service time; 2 - priority; 3 - actual start; 4 - end time
+	
+	printf("\n\n***********FCFS****************\n\n");
 	printProcessTracker();
 	printFCFSOrder(copy_list);
+
+	printf("\n\n***********Round Robin**************\n\n");
 	RoundRobin(list);
 	return 1;
 }
