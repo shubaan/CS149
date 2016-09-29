@@ -25,7 +25,7 @@ int main(){
 	printf("\n\n***********FCFS****************\n\n");
 	printProcessTracker();
 	printFCFSOrder(copy_list);
-
+	free(copy_list);
 	printf("\n\n***********Round Robin**************\n\n");
 	RoundRobin(list);
 	return 1;
