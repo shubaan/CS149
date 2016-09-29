@@ -6,16 +6,16 @@
 #include <string.h>
 
 
-
-
-void shortestJobFirst(struct process* o_plist) //process list is an array with all the processes 
+char* shortestJobFirst(struct process* o_plist) //process list is an array with all the processes 
 //with info about arrival time and service time. 
 
 {
-
 	int currentQuanta; //keep track of the quanta during odering.
-	
+	int size = 0;
+    int charIndex = 0;
 
+    char* arrayFCFSOrder = malloc(sizeof(char) * CHAR_ARRAYMAX); // Allocate enough to leave spaces for last process to finish 
+    memset(arrayFCFSOrder, 32, sizeof(char) * CHAR_ARRAYMAX);
 	struct process* newArrivalArray = malloc(sizeof(struct process) * NUM_PROCESS); //initialize arrays with size of NUM_PROCESS
 
 	struct process* temp; //this is a single empty process called temp that I use for swapping.
@@ -29,76 +29,122 @@ void shortestJobFirst(struct process* o_plist) //process list is an array with a
 	SortBy(&newArrivalArray, 0); //Sort processes in array by arrival times only.
 
 	newArrivalArray[0].actual_start_time = newArrivalArray[0].arrival_time; 
-	
+	size++;
+
 	//Since the first process will always be started.
+
+    for (int x = 0; x < newArrivalArray[0].arrival_time; x++) {
+        arrayFCFSOrder[x] = '-';
+        charIndex++;
+    }
+
+    for (int x = newArrivalArray[0].arrival_time; x <= newArrivalArray[0].service_time; x++) {
+        arrayFCFSOrder[x] = newArrivalArray[0].name;
+        charIndex++;
+    }
+
 	currentQuanta = newArrivalArray[0].arrival_time + newArrivalArray[0].service_time; 
-	printf("Beginning quanta after first process: %d\n", currentQuanta);
-printf("THIS IS SORTED BASED ON ARRIVAL TIME ONLY");
-for(int i = 0; i < NUM_PROCESS; i++)
-{
- printf("\n%s...................%d..............................%f\n", &newArrivalArray[i].name, newArrivalArray[i].arrival_time, newArrivalArray[i].service_time);
-}//for testing purposes.
-//HERE IS START OF SJF ordering. Return array of processes with correct order of SJF execution. 
-//for(int i = 1; i< NUM_PROCESS; i++)
-//{
+
+    newArrivalArray[0].end_time = currentQuanta;
+
 	for(int j=1; j<NUM_PROCESS; j++) //we start at 1 because the first process (0 index) will start first always
 	{ //each index is a Process.
-		
 		
 			//swap around indexes within serviceArray
 			if(newArrivalArray[j+1].arrival_time <= currentQuanta && newArrivalArray[j+1].arrival_time <= currentQuanta) //If Both processes arrived already.
 			{
 					if(newArrivalArray[j+1].service_time < newArrivalArray[j].service_time) //compare service times
 					{
+                        for (int x = 0; x < newArrivalArray[j].service_time; x++) {
+                            arrayFCFSOrder[charIndex] = newArrivalArray[j].name;
+                            charIndex++;
+                        }
+
+
 						temp = &newArrivalArray[j]; //added address symbol infront of array
 						newArrivalArray[j] = newArrivalArray[j+1];
 						newArrivalArray[j+1] = *temp; //dereferencing
 						newArrivalArray[j].actual_start_time = currentQuanta; //this is the actual start time for each process
-						currentQuanta = currentQuanta + newArrivalArray[j].service_time;
-						 
-						printf("currentQuanta: %d ", currentQuanta);
+						
+                       
+                        currentQuanta = currentQuanta + newArrivalArray[j].service_time;
+						size++;
+                        newArrivalArray[j].end_time = currentQuanta;
+                        
+                       
 					}
 					else
 					{
+
+                         for (int x = 0; x < newArrivalArray[j].service_time; x++) {
+                            arrayFCFSOrder[charIndex] = newArrivalArray[j].name;
+                            charIndex++;
+                        }
+                          
 						newArrivalArray[j].actual_start_time = currentQuanta;
 						currentQuanta = currentQuanta + newArrivalArray[j].service_time;
-						printf("currentQuanta: %d ", currentQuanta);
+                        size++;
+                        newArrivalArray[j].end_time = currentQuanta;
+                        
 					}
+
 			}
 			else if (newArrivalArray[j].arrival_time <= currentQuanta && newArrivalArray[j+1].arrival_time > currentQuanta)
 			{
+
+                
+                for (int x = 0; x < newArrivalArray[j].service_time; x++) {
+                    arrayFCFSOrder[charIndex] = newArrivalArray[j].name;
+                    charIndex++;
+                }
+
 				//then we keep the process of j in that position since j+1 hasnt even arrived.
 				newArrivalArray[j].actual_start_time = currentQuanta;
+
 				currentQuanta = currentQuanta + newArrivalArray[j].service_time;
-				printf("currentQuanta: %d ", currentQuanta);
+                newArrivalArray[j].end_time = currentQuanta;
+                size++;
+                
 			}
 
 			else //This whole condition is for when neither processes have arrived at the current Quanta
 			{
 				while(currentQuanta-1 != newArrivalArray[j].arrival_time-1 || currentQuanta-1 < newArrivalArray[j].arrival_time-1) //So we 
 				{
+                    arrayFCFSOrder[currentQuanta] = '-';
+                    charIndex++;
 					newArrivalArray[j].actual_start_time = currentQuanta + 1;
-
 					currentQuanta++;
-					printf("currentQuanta: %d ", currentQuanta);
+
 				}	
+                newArrivalArray[j].end_time = currentQuanta;
+                size++;
 			}
 
+            if (currentQuanta > MAX_QUANTA - 1) {
+                break;
+            }
+
 		}
-//	}
-	//Displaying the order of each process with its name, arrival time, and service time.
-	printf("\nThe Order of Processes for ShortestJobFirst\n");
-	printf("\nProcess Name,   Arrival Time,    Actual Start Time,   Service Time\n");
+	
+    for (int i = 0; i < CHAR_ARRAYMAX; i++) {
+        if (arrayFCFSOrder[i] == ' ' && i < 10) { 
+            printf("  ");
+        } else if (arrayFCFSOrder[i] == ' ' && i >= 10) {
+            printf("   ");
+        } else if (i < 10) {
+            printf("%c ", arrayFCFSOrder[i]);
+        } else {
+            printf("%c  ", arrayFCFSOrder[i]);
+        }
+    }
+    free(arrayFCFSOrder);
+    
+    // Size is now the # of processes that completed its process 
+    printf("\nAverage response time: %.2f\n", calAverageResponse2(newArrivalArray, size));
+    printf("Average waiting time: %.2f\n", calAverageWaiting(newArrivalArray, size));
+    printf("Average turnaround time: %.2f\n", calAverageTurnaround(newArrivalArray, size));
+	printf("Throughput: %.d\n", size);
 
-for(int i = 0; i < NUM_PROCESS; i++)
-{
- printf("\n%s...................%d..............................%d..............................%f\n", &newArrivalArray[i].name, newArrivalArray[i].arrival_time, newArrivalArray[i].actual_start_time, newArrivalArray[i].service_time);
-}
-
-		
-		
-
-
-//printshortestjobfirst(newArrivalArray);
-return;
+    return arrayFCFSOrder;
 }

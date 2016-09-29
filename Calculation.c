@@ -39,6 +39,16 @@ float calAverageResponse(struct process plist[], int size) {
 	return (responseTime / (size - incomplete_process));
 }
 
+float calAverageResponse2(struct process plist[], int size) {
+	float responseTime = 0.0;
+
+	for (int i = 0; i < size; i++) {
+		// Response time is the actual starting time to when the first output is produced
+		responseTime += plist[i].end_time - plist[i].actual_start_time;
+	}
+	return (responseTime / size);
+}
+
 int calThroughput(char charArray[], int size) {
 	// Only processes that are completed before the [0-99] quanta range are counted.
 	int throughput = size;
