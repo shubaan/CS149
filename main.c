@@ -44,9 +44,9 @@ int main(){
 	printProcessTracker();
 	printFCFSOrder(copy_list);
 	free(copy_list);
-	printf("\n\n***********Round Robin**************\n\n");
+	printf("\n\n***********ROUND ROBIN**************\n\n");
 	RoundRobin(list);
-
+	printf("\n\n***********SHORTEST JOB FIRST**************\n\n");
 	shortestJobFirst(list);
 	return 1;
 }
@@ -91,26 +91,5 @@ void printFCFSOrder(struct process* plist) {
 	printf("Average waiting time: %.2f\n", calAverageWaiting(plist, process_ran));
 	printf("Average turnaround time: %.2f\n", calAverageTurnaround(plist, process_ran));
 	printf("Throughput: %d\n", process_ran);
-	free(charArray);
-}
-
-void printShortestJobFirstOrder(struct process plist) {
-
-	int process_ran;
-	char* charArray = shortestJobFirst(&plist);
-
-	// Adjust to add extra spaces to match printProcessTracker();
-	// Char array doesn't have extra spaces to accommodate the difference
-	for (int i = 0; i < CHAR_ARRAYMAX; i++) {
-		if (charArray[i] == ' ' && i < 10) { 
-			printf("  ");
-		} else if (charArray[i] == ' ' && i >= 10) {
-			printf("   ");
-		} else if (i < 10) {
-			printf("%c ", charArray[i]);
-		} else {
-			printf("%c  ", charArray[i]);
-		}
-	}
 	free(charArray);
 }
