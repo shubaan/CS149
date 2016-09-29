@@ -6,6 +6,8 @@
 #include "Sorter.h"
 #include "Calculation.h"
 #include <time.h>
+#include "HFPA.h"
+#include "PreHFPA.h"
 //TODO: CONGREGATE DEFINE DEFINTIONS IN OWN HEADERFILE
 
 void printProcessTracker();
@@ -21,7 +23,7 @@ int main(){
 	PrintProcessList(list);
 	memcpy(copy_list, list, sizeof(struct process) * NUM_PROCESS);
 	SortBy(&copy_list, 0); //The input num decides what field to sort by 0 - arrival time; 1 - service time; 2 - priority; 3 - actual start; 4 - end time
-	
+
 	printf("\n\n***********FCFS****************\n\n");
 	printProcessTracker();
 	printFCFSOrder(copy_list);
@@ -52,7 +54,7 @@ void printFCFSOrder(struct process* plist) {
 	// Adjust to add extra spaces to match printProcessTracker();
 	// Char array doesn't have extra spaces to accommodate the difference
 	for (int i = 0; i < CHAR_ARRAYMAX; i++) {
-		if (charArray[i] == ' ' && i < 10) { 
+		if (charArray[i] == ' ' && i < 10) {
 			printf("  ");
 		} else if (charArray[i] == ' ' && i >= 10) {
 			printf("   ");
@@ -63,7 +65,7 @@ void printFCFSOrder(struct process* plist) {
 		}
 	}
 	printf("\n");
-	// Size is now the # of processes that completed its process 
+	// Size is now the # of processes that completed its process
 	printf("Average response time: %.2f\n", calAverageResponse(plist, process_ran));
 	printf("Average waiting time: %.2f\n", calAverageWaiting(plist, process_ran));
 	printf("Average turnaround time: %.2f\n", calAverageTurnaround(plist, process_ran));
