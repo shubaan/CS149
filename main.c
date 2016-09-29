@@ -6,8 +6,8 @@
 #include "Sorter.h"
 #include "Calculation.h"
 #include <time.h>
-#include "HFPA.h"
-#include "PreHFPA.h"
+//#include "HFPA.h"
+//#include "PreHFPA.h"
 //TODO: CONGREGATE DEFINE DEFINTIONS IN OWN HEADERFILE
 
 void printProcessTracker();
@@ -28,15 +28,15 @@ int main(){
 	memcpy(HPFA1_list, list, sizeof(struct process) * NUM_PROCESS);
 	memcpy(HPFA2_list, list, sizeof(struct process) * NUM_PROCESS);
 	SortBy(&copy_list, 0); //The input num decides what field to sort by 0 - arrival time; 1 - service time; 2 - priority; 3 - actual start; 4 - end time
-    SortBy(&HPFA1_list);
-    SortBY(&HPFA2_list);
+    SortBy(&HPFA1_list, 2);
+    SortBY(&HPFA2_list, 2);
 
     printf("\n\n***********NONPREHPFA****************\n\n");
 	printProcessTracker();
 	printFCFSOrder(HPFA1_list);
 
 	printf("\n\n***********PREHPFA****************\n\n");
-	PreHFPA(HFPA2_list);
+	PreHFPA(HPFA2_list);
 
 	printf("\n\n***********FCFS****************\n\n");
 	printProcessTracker();
