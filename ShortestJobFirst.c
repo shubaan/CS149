@@ -4,6 +4,7 @@
 #include "Calculation.h"
 #include "ShortestJobFirst.h"
 #include <string.h>
+#include "Sorter.h"
 
 
 char* shortestJobFirst(struct process* o_plist) //process list is an array with all the processes 
