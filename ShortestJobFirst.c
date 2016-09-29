@@ -111,14 +111,13 @@ char* shortestJobFirst(struct process* o_plist) //process list is an array with 
 			{
 				while(currentQuanta-1 != newArrivalArray[j].arrival_time-1 || currentQuanta-1 < newArrivalArray[j].arrival_time-1) //So we 
 				{
-                    arrayFCFSOrder[currentQuanta] = '-';
-                    charIndex++;
+                    //arrayFCFSOrder[currentQuanta] = '-';
 					newArrivalArray[j].actual_start_time = currentQuanta + 1;
 					currentQuanta++;
 
 				}	
+                arrayFCFSOrder[currentQuanta] = '-';
                 newArrivalArray[j].end_time = currentQuanta;
-                size++;
 			}
 
             if (currentQuanta > MAX_QUANTA - 1) {
@@ -128,15 +127,9 @@ char* shortestJobFirst(struct process* o_plist) //process list is an array with 
 		}
 	
     for (int i = 0; i < CHAR_ARRAYMAX; i++) {
-        if (arrayFCFSOrder[i] == ' ' && i < 10) { 
-            printf("  ");
-        } else if (arrayFCFSOrder[i] == ' ' && i >= 10) {
-            printf("   ");
-        } else if (i < 10) {
-            printf("%c ", arrayFCFSOrder[i]);
-        } else {
-            printf("%c  ", arrayFCFSOrder[i]);
-        }
+       
+            printf("%c", arrayFCFSOrder[i]);
+        
     }
     free(arrayFCFSOrder);
     
