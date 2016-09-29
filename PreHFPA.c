@@ -4,7 +4,7 @@
 #include "Calculation.h"
 #define TRUE 1 //add header to store define variables
 
-void RoundRobin(struct process* o_plist){ //original plist. Gonna use copy so the arrays can be modified in the funciton
+void PreHFPA(struct process* o_plist){ //original plist. Gonna use copy so the arrays can be modified in the funciton
 	int counter_char_array = 0;
 	int process_completed = 0;
 	int counter_process = 0;
@@ -30,7 +30,7 @@ void RoundRobin(struct process* o_plist){ //original plist. Gonna use copy so th
 		counter_char_array++;
 	}
 
-	while(TRUE){ 
+	while(TRUE){
 		if(quanta >= MAX_QUANTA) break;
 		//Checks how many processes are currently in queued, if there is a 1 in the array slot, there is process that has both arrived and has positive service time - can change to do so it always runs once
 		for(int x = 0; x < NUM_PROCESS; x++){
@@ -105,7 +105,7 @@ void RoundRobin(struct process* o_plist){ //original plist. Gonna use copy so th
 
 	//printf("Waiting: %d Process Complete: %d\n", total_waiting_time, process_completed);
 
-	// Size is now the # of processes that completed its process 
+	// Size is now the # of processes that completed its process
 	printf("Average response time: %.2f\n", calAverageResponse(plist, process_completed));
 	printf("Average waiting time: %.2f\n", ((float) total_waiting_time / (float) process_completed));
 	printf("Average turnaround time: %.2f\n", calAverageTurnaround(plist, process_completed));
