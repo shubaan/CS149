@@ -19,8 +19,11 @@ void SortBy(struct process** plist, int num);
  */
 void SortByRec(struct process** plist, int num, int range_lo, int range_hi);
 
-// DELETE THIS FUNCTION
 
+/**
+ * [PrintServiceTime - function for testing service time of process list]
+ * @param plist process list to view service times
+ */
 void PrintServiceTime(struct process** plist);
 
 /**
