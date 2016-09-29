@@ -62,3 +62,4 @@ int calThroughput(char charArray[], int size) {
 
 	return throughput;
 }
+
