@@ -103,7 +103,7 @@ void RoundRobin(struct process* o_plist){ //original plist. Gonna use copy so th
 		total_waiting_time += time_waited[x];
 	}
 
-	printf("Waiting: %d Process Complete: %d\n", total_waiting_time, process_completed);
+	//printf("Waiting: %d Process Complete: %d\n", total_waiting_time, process_completed);
 
 	// Size is now the # of processes that completed its process 
 	printf("Average response time: %.2f\n", calAverageResponse(plist, process_completed));
