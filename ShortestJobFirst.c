@@ -118,6 +118,7 @@ char* shortestJobFirst(struct process* o_plist) //process list is an array with 
 				}	
                 arrayFCFSOrder[currentQuanta] = '-';
                 newArrivalArray[j].end_time = currentQuanta;
+                size++;
 			}
 
             if (currentQuanta > MAX_QUANTA - 1) {
