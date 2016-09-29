@@ -3,7 +3,6 @@
 #include "process_producer.h"
 #include "Sorter.h"
 
-//TODO CHANGE SO IT DOESN'T INCLUDE ACTUAL
 void PrintProcessList(struct process process_list[]){
 	for(int x = 0; x < NUM_PROCESS; x++){
 		printf("%c: Service Time: %.1f Priority: %02d Arrival Time: %02d\n", process_list[x].name, process_list[x].service_time, process_list[x].priority, process_list[x].arrival_time);

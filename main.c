@@ -25,7 +25,7 @@ int main(){
 	printf("\n\n***********FCFS****************\n\n");
 	printProcessTracker();
 	printFCFSOrder(copy_list);
-
+	free(copy_list);
 	printf("\n\n***********Round Robin**************\n\n");
 	RoundRobin(list);
 	return 1;
@@ -43,7 +43,10 @@ void printProcessTracker() {
 	printf("\n");
 }
 
-
+/**
+ * [printFCFSOrder gets the proper order using FCFS algorithm then prints necessary attributes - Time graph, average response, wainting, and turnaround]
+ * @param plist [process list to run FCFS algorithm on]
+ */
 void printFCFSOrder(struct process* plist) {
 
 	int process_ran;
