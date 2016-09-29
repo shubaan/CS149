@@ -53,8 +53,9 @@ for(int i = 0; i < NUM_PROCESS; i++)
 						temp = &newArrivalArray[j]; //added address symbol infront of array
 						newArrivalArray[j] = newArrivalArray[j+1];
 						newArrivalArray[j+1] = *temp; //dereferencing
-						currentQuanta = currentQuanta + newArrivalArray[j].service_time;
 						newArrivalArray[j].actual_start_time = currentQuanta; //this is the actual start time for each process
+						currentQuanta = currentQuanta + newArrivalArray[j].service_time;
+						 
 						printf("currentQuanta: %d ", currentQuanta);
 					}
 					else
