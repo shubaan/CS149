@@ -11,7 +11,7 @@ void printProcessTracker();
 void printFCFSOrder(struct process* plist);
 
 int main(){
-	int seed = 0;
+	int seed = time(NULL);
 	float runtime;
 	srand(seed);
 	struct process* list;
