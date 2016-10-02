@@ -11,6 +11,13 @@ struct seller{
 
 typedef struct seller seller;
 
+/**
+ * [print_sellers prints a list of - their name and their sales price]
+ * @param list   [list of sellers]
+ * @param length [the number of sellers]
+ */
 void print_sellers(seller* list, int length);
+
+void* sell_seats(void* seat_seller);
 
 #endif
