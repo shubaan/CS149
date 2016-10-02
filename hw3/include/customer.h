@@ -10,4 +10,8 @@ struct customer{
 
 typedef struct customer customer;
 
+void make_customers(customer** queue, int length);
+
+void print_customers(customer* list, int length);
+
 #endif
