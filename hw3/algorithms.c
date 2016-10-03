@@ -14,6 +14,7 @@ static void swap(void* obj_a, void* obj_b, int size_a, int size_b){
 void sort(void* start_obj, int* int_comp, int obj_size, int length){
 	//Set pointer to beginning of array
 	length -= 1;
+	int inc = 1; int pivot = length; int lo = 0;
 	char* lo; char* hi;
 	char* beg_objb = (char*) start_obj;
 	char* int_compb = (char*) int_comp;
