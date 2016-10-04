@@ -1,7 +1,7 @@
 #ifndef ALGORITHMS
 #define ALGORITHMS
 /**
- * [sort sorts objects from smallest to largest]
+ * [sort sorts objects from smallest to largest. Objects must have an integer for comparison]
  * @param start_obj [beginning of the array containing the list of objects]
  * @param int_comp  [pointer to the first integer contained in the object. this is the integer to compare]
  * @param obj_size  [size of each object/struct in the array]
