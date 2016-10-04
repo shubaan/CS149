@@ -8,7 +8,7 @@
 
 #define NUM_OF_H_SELLERS 1
 #define NUM_OF_M_SELLERS 10
-#define NUM_OF_L_SELLERS 10
+#define NUM_OF_L_SELLERS 4
 
 void wake_up(){
 	pthread_mutex_lock(&seat_access);
@@ -32,9 +32,9 @@ int main(){
 	seller* l_sellers = malloc(sizeof(seller) * NUM_OF_L_SELLERS);//create l_sellers
 	filled_seats = 0;
 
-	//Setting logs and threads
-	seat_access = PTHREAD_MUTEX_INITIALIZER;
-	cond = PTHREAD_COND_INITIALIZER;
+	//Setting and threads
+	seat_access = (pthread_mutex_t) PTHREAD_MUTEX_INITIALIZER;
+	cond = (pthread_cond_t) PTHREAD_COND_INITIALIZER;
 	pthread_t h_seller_thread;
 	pthread_t m_sellers_thread[10];
 	pthread_t l_sellers_thread[10];
