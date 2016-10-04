@@ -18,6 +18,10 @@ typedef struct seller seller;
  */
 void print_sellers(seller* list, int length);
 
+/**
+ * [sell_seats function to run in threads that will simulate a seller selling tickets to customers in queue]
+ * @param seat_seller [pinter to seller]
+ */
 void* sell_seats(void* seat_seller);
 
 #endif
