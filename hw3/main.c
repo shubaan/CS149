@@ -22,7 +22,7 @@ void print_seats();
 int main(){
 
 	//Initilization of variables
-	int seed = 0;
+	int seed = 1;
 	srand(seed);
 	start = false;
 	seat_map = malloc(TOTAL_SEATS * (sizeof(char) * 3)); //100 seats can store 3 each seat
